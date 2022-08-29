@@ -8,11 +8,11 @@
 	</head>
 	
 	<body>
-		<h2>HTMLで表示する例</h2>
+		<h2>いろいろな型のデータを表示する例</h2>
 		<div id="app">
+			<p>{{ myNumber }}</p>
 			<p>{{ myText }}</p>
-			<p v-text="myText"></p>
-			<p v-html="myText"></p>
+			<p>{{ myBool }}</p>
 		</div>
 
 
@@ -20,7 +20,9 @@
 		new Vue({
 			el:'#app',
 			data:{
-				myText:'<h1>Hello!!!</h1>'
+				myNumber:12345,
+				myText:'Hello',
+				myBool:true
 			}
 		})
 		</script>
