@@ -8,25 +8,29 @@
 	</head>
 	
 	<body>
-		<h2>クリックしたら、1増やす例</h2>
+		<h2>クリックしたら、2回目は押せなくなるいいねボタンの例</h2>
 		<div id="app">
-			<p>{{count}}</p>
-			<button v-on:click="countUp">1増やす</button>
+			<button value="いいね" v-bind:disabled="isClick"
+			v-on:click="oneClick8888888888 jmjm">いいね</button>
 		</div>
 
 
 		<script>
+		function iine(){
+			alert("いいね");
+		}
 		new Vue({
 			el:'#app',
 			data:{
-				count:0
+				isClick:false
 			},
 			methods: {
-				countUp:function(){
-					this.count++;
+				oneclick:function(){
+					this.isClick=ture;
+					iine();
 				}
-			},
-		})
+				}
+			})
 		</script>
 	</body>
 </html>
