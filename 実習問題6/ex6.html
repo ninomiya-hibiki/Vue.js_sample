@@ -17,31 +17,38 @@
         <tbody>
             <tr>
             <th>県名</th>
+            <th>県庁所在地</th>
             <th>人口</th>
             </tr>
 
             <tr>
             <td>{{prefecture[0].name}}</td>
+            <td>{{prefecture[0].a}}</td>
             <td>{{prefecture[0].population}}万人</td>
             </tr>
             <tr>
               <td>{{prefecture[1].name}}</td>
+              <td>{{prefecture[1].a}}</td>
               <td>{{prefecture[1].population}}万人</td>
               </tr>
               <tr>
                 <td>{{prefecture[2].name}}</td>
+                <td>{{prefecture[2].a}}</td>
                 <td>{{prefecture[2].population}}万人</td>
                 </tr>
               <tr>
                 <td>{{prefecture[3].name}}</td>
+                <td>{{prefecture[3].a}}</td>
                 <td>{{prefecture[3].population}}万人</td>
               </tr>
               <tr>
                 <td>{{prefecture[4].name}}</td>
+                <td>{{prefecture[4].a}}</td>
                 <td>{{prefecture[4].population}}万人</td>
               </tr>
               <tr>
                 <td>{{prefecture[5].name}}</td>
+                <td>{{prefecture[5].a}}</td>
                 <td>{{prefecture[5].population}}万人</td>
               </tr>
             </tbody>
@@ -57,12 +64,12 @@
         el: '#app',
         data: {
           prefecture: [
-            {name: '青森県', population: 124.9},
-            {name: '岩手県', population: 122.9},
-            {name: '秋田県', population: 96.6},
-            {name: '宮城県', population: 230.6},
-            {name: '山形県', population: 108},
-            {name: '福島県', population: 184.8}
+            {name: '青森県',a:'青森市', population: 124.9},
+            {name: '岩手県',a:'盛岡市', population: 122.9},
+            {name: '秋田県',a:'秋田市', population: 96.6},
+            {name: '宮城県',a:'仙台市', population: 230.6},
+            {name: '山形県',a:'山形市', population: 108},
+            {name: '福島県',a:'福島市', population: 184.8}
           ]
         }
       })
