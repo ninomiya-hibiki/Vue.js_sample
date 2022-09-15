@@ -10,20 +10,13 @@
   </head>
   <body>
     <div id="app">
-      <input v-model.number="price"type="number">円×
+      <h2>消費税込み価格計算</h2>
+      定価:<input v-model.number="price"type="number">円×
       <input v-model.number="count"type="number">個
-      </div>
-      <div>
-        "消費税率:"
-      <input v-model.number="aaa"type=number>%
-      <p>消費税込みの価格は{{taxIncluded}}</p>
-
-
-
-
-
-
-
+      <p>
+      消費税率:<input v-model.number="tax"type="number">%
+      </p>
+      <p>消費税込みの価格は{{taxPrice}}</p>
     </div>
 
     <script>
@@ -32,22 +25,14 @@
         data:{
             price:100,
             count:1,
-            aaa:1
+            tax:1
         },
         computed: {
-            taxIncluded:function(){
-                return (this.price*this.count)*(1+this.aaa/100)
+            taxPrice:function(){
+                return Math.floor(
+                  this.price*this.count*(1+this.tax/100));
             }
-        },
-
-
-
-
-
-
-
-
-
+        }
       })
     </script>
   </body>
