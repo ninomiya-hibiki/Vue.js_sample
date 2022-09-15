@@ -12,17 +12,26 @@
   <body>
     <h2>trueのときだけ表示する例</h2>
     <div id="app">
-      <input type="checkbox"v-model="myVisible">Google本社
-      <p v-if="myVisible"> <img src="Google.jpg"></p>
-      </div>
+    <input type="checkbox"v-model="myVisible">Google本社
+    <p v-if="myVisible"><img src="Google.jpg"></p>
+    <p v-else><img src="Microsoft.jpg"></p>
 
+
+
+
+
+
+
+
+    </div>
 
     <script>
       new Vue({
         el: '#app',
         data: {
           myVisible: false,
-          googleImg: 'Google.jpg'
+          googleImg: 'Google.jpg',
+          microsoftImg: 'Microsoft.jpg'
         }
       })
     </script>
