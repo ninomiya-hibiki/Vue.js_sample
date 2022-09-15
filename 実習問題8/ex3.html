@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <title>Vue.js 演習問題</title>
+    <link href="main.css" rel="stylesheet">
+    <script src
+      ="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js">
+    </script>
+  </head>
+  <body>
+    <div id="app">
+      <input v-model.number="price"type="number">円×
+      <input v-model.number="count"type="number">個
+      </div>
+      <div>
+        "消費税率:"
+      <input v-model.number="aaa"type=number>%
+      <p>消費税込みの価格は{{taxIncluded}}</p>
+
+
+
+
+
+
+
+    </div>
+
+    <script>
+      new Vue({
+        el: '#app',
+        data:{
+            price:100,
+            count:1,
+            aaa:1
+        },
+        computed: {
+            taxIncluded:function(){
+                return (this.price*this.count)*(1+this.aaa/100)
+            }
+        },
+
+
+
+
+
+
+
+
+
+      })
+    </script>
+  </body>
+</html>
+
