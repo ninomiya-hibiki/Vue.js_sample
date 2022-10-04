@@ -7,33 +7,32 @@
     <title>Single Page Application</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
-<body>
+<body class="bg">
     <div id="app">
         <div class="container mt-5">
             <div class="row">
                 <div class="col-md-12">
                     <h1>{{ title }}</h1>
-                    <button class="btn-touroku my-2" @click="showModal">ユーザ登録</button>
                     <table class="table">
-                        <thead class="thead-dark">
+                        <thead class="hed">
                             <tr>
-                                <th>ID</th>
-                                <th>NAME</th>
-                                <th>EMAIL</th>
-                                <th>更新</th>
-                                <th>削除</th>
+                                <th>名前</th>
+                                <th>国名</th>
+                                <th></th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody class="my-comp">
                             <tr v-for="user in users" v-bind:key="user.id">
-                                <td>{{ user.id }}</td>
                                 <td>{{ user.name }}</td>
                                 <td>{{ user.email }}</td>
-                                <td><button class="btn btn-primary" @click="editUser(user)">更新</button></td>
+                                <td><button class="btn btn-primary" @click="editUser(user)">変更</button></td>
                                 <td><button class="btn btn-danger" @click="deleteUser(user)">削除</button></td>
                             </tr>
                         </tbody>
                     </table>
+                    <button class="btn-umi"@click="externalLink">おすすめの海</button>
+                    <button class="btn-touroku" @click="showModal">追加</button>
                 </div>
             </div>
         </div>
@@ -41,30 +40,25 @@
             <div class="card">
                 <div class="card-body">
                     <div class="card-title">
-                        <h2 v-if="createFlag">ユーザ登録</h2>
-                        <h2 v-else>ユーザ更新</h2>
+                        <h2 v-if="createFlag">追加</h2>
+                        <h2 v-else>変更</h2>
                     </div>
                     <div class="card-text">
                         <div class="form-group">
-                            <label for="id">ID</label>
-                            <input type="text" class="form-control" id="id" placeholder="IDを入力してください" v-model="form.id">
-                        </div>
-                        <div class="form-group">
                             <label for="name">NAME</label>
-                            <input type="text" class="form-control" id="name" placeholder="NAMEを入力してください" v-model="form.name">
+                            <input type="text" class="form-control" id="name" placeholder="名前を入力してください" v-model="form.name">
                         </div>
                         <div class="form-group">
-                            <label for="id">EMAIL</label>
-                            <input type="email" class="form-control" id="email" placeholder="Emailを入力してください" v-model="form.email">
+                            <label for="id">Country</label>
+                            <input type="text" class="form-control" id="email" placeholder="国名を入力してください" v-model="form.email">
                         </div>
                         <button class="btn btn-primary" @click="registerUser" v-if="createFlag">登録</button>
-                        <button class="btn btn-primary" @click="updateUser" v-else>更新</button>
+                        <button class="btn btn-primary" @click="updateUser" v-else>変更</button>
                     </div>
                 </div>
             </div>
         </modal>
     </div>
-    
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue-js-modal@1.3.31/dist/index.min.js"></script>
     <script>
@@ -72,9 +66,8 @@
         const vue = new Vue({
             el: "#app",
             data: {
-                title: 'ユーザ一覧',
+                title: '世界の綺麗な海！',
                 form:{
-                    id:'',
                     name:'',
                     email:''
                 },
@@ -95,7 +88,6 @@
                     this.resetForm();
                 },
                 resetForm(){
-                    this.form.id = '';
                     this.form.name = '';
                     this.form.email = '';
                 },
@@ -112,30 +104,46 @@
                 updateUser(){
                     Object.assign(this.users[this.editIndex], this.form);
                     this.$modal.hide('user-modal');
+                },
+                externalLink() {
+                const url = 'https://www.travelbook.co.jp/topic/140'
+                window.location.href = url
                 }
             },
             created(){
                 this.users = [
                     {
-                        id: 1,
-                        name: 'あいうえお',
-                        email: 'agyou@gmail.com'
+                        name: 'サンチョ湾ビーチ',
+                        email: 'ブラジル'
                     },
                     {
-                        id: 2,
-                        name: 'かきくけこ',
-                        email: 'kagyou@gmail.com'
+                        name: 'ラニカイビーチ',
+                        email: 'ハワイ・オアフ島'
                     },
                     {
-                        id: 3,
-                        name: 'さしすせそ',
-                        email: 'sagyou@gmail.com'
+                        name: 'ホワイトヘブンビーチ',
+                        email: 'オーストラリア・ウィットサンデー島'
+                    },
+                    {
+                        name: 'ロングビーチ',
+                        email: 'パラオ・オモカン島'
+                    },
+                    {
+                        name: 'ロンガニビーチ',
+                        email: 'ニューカレドニア・リフー島'
                     },
                 ]
             }
         })
     </script>
         <style>
+            .hed{
+                background-color: rgb(227, 203, 49);
+            }
+            .bg{
+                background-image: url("海.jpg");
+                background-size:auto;
+            }
             .btn-touroku{
                 background-color: rgba(0, 255, 255, 0.914);
                 border: solid;
@@ -143,9 +151,12 @@
             }
             .my-comp {
               width: 300px;
-              background-color: rgb(129, 206, 148);
+              background-color: rgb(129, 206, 192);
               border: solid;
               border-color: rgb(201, 201, 201);
+            }
+            .btn-umi{
+                background-color: rgb(255, 208, 127);
             }
           </style>
 </body>
