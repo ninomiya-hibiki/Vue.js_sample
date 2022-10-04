@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Single Page Application</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body class="bg">
+    <div id="app">
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1>{{ title }}</h1>
+                    <table class="table">
+                        <thead class="hed">
+                            <tr>
+                                <th>名前</th>
+                                <th>国名</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody class="my-comp">
+                            <tr v-for="user in users" v-bind:key="user.id">
+                                <td>{{ user.name }}</td>
+                                <td>{{ user.email }}</td>
+                                <td><button class="btn btn-primary" @click="editUser(user)">変更</button></td>
+                                <td><button class="btn btn-danger" @click="deleteUser(user)">削除</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <button class="btn-umi"@click="externalLink">おすすめの海</button>
+                    <button class="btn-touroku" @click="showModal">追加</button>
+                </div>
+            </div>
+        </div>
+        <modal name="user-modal" :height="400">
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-title">
+                        <h2 v-if="createFlag">追加</h2>
+                        <h2 v-else>変更</h2>
+                    </div>
+                    <div class="card-text">
+                        <div class="form-group">
+                            <label for="name">NAME</label>
+                            <input type="text" class="form-control" id="name" placeholder="名前を入力してください" v-model="form.name">
+                        </div>
+                        <div class="form-group">
+                            <label for="id">Country</label>
+                            <input type="text" class="form-control" id="email" placeholder="国名を入力してください" v-model="form.email">
+                        </div>
+                        <button class="btn btn-primary" @click="registerUser" v-if="createFlag">登録</button>
+                        <button class="btn btn-primary" @click="updateUser" v-else>変更</button>
+                    </div>
+                </div>
+            </div>
+        </modal>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue-js-modal@1.3.31/dist/index.min.js"></script>
+    <script>
+        Vue.use(window["vue-js-modal"].default);
+        const vue = new Vue({
+            el: "#app",
+            data: {
+                title: '世界の綺麗な海！',
+                form:{
+                    name:'',
+                    email:''
+                },
+                users: [],
+                editIndex: -1,
+                createFlag: true,
+            },
+            methods: {
+                showModal(){
+                    this.createFlag = true;
+                    this.resetForm();
+                    this.$modal.show('user-modal');
+                },
+                registerUser(){
+                    const user = Object.assign({},this.form);
+                    this.users.push(user);
+                    this.$modal.hide('user-modal');
+                    this.resetForm();
+                },
+                resetForm(){
+                    this.form.name = '';
+                    this.form.email = '';
+                },
+                deleteUser(user){
+                    const index = this.users.indexOf(user);
+                    this.users.splice(index, 1)
+                },
+                editUser(user){
+                    this.createFlag = false,
+                    this.editIndex = this.users.indexOf(user);
+                    this.form = Object.assign({}, user);
+                    this.$modal.show('user-modal');
+                },
+                updateUser(){
+                    Object.assign(this.users[this.editIndex], this.form);
+                    this.$modal.hide('user-modal');
+                },
+                externalLink() {
+                const url = 'https://www.travelbook.co.jp/topic/140'
+                window.location.href = url
+                }
+            },
+            created(){
+                this.users = [
+                    {
+                        name: 'サンチョ湾ビーチ',
+                        email: 'ブラジル'
+                    },
+                    {
+                        name: 'ラニカイビーチ',
+                        email: 'ハワイ・オアフ島'
+                    },
+                    {
+                        name: 'ホワイトヘブンビーチ',
+                        email: 'オーストラリア・ウィットサンデー島'
+                    },
+                    {
+                        name: 'ロングビーチ',
+                        email: 'パラオ・オモカン島'
+                    },
+                    {
+                        name: 'ロンガニビーチ',
+                        email: 'ニューカレドニア・リフー島'
+                    },
+                ]
+            }
+        })
+    </script>
+        <style>
+            .hed{
+                background-color: rgb(227, 203, 49);
+            }
+            .bg{
+                background-image: url("海.jpg");
+                background-size:auto;
+            }
+            .btn-touroku{
+                background-color: rgba(0, 255, 255, 0.914);
+                border: solid;
+                border-color: rgba(119, 115, 120, 0.1);
+            }
+            .my-comp {
+              width: 300px;
+              background-color: rgb(129, 206, 192);
+              border: solid;
+              border-color: rgb(201, 201, 201);
+            }
+            .btn-umi{
+                background-color: rgb(255, 208, 127);
+            }
+          </style>
+</body>
+</html>
